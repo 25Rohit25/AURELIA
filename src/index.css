@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   AURELIA — design tokens
+   Tailwind v4 theme layer. Every value here becomes a utility
+   (e.g. --color-gold -> bg-gold / text-gold / border-gold).
+
+   The palette is deliberately WARM rather than neutral. The rooms
+   in the walkthrough are wood, cream and lamplight; a cool grey
+   shell fought them. Every surface here carries a little red and
+   yellow, so the page and the photography read as one material.
+   ============================================================ */
+@theme {
+  /* Surfaces — warm espresso, deepening toward the back of the stack */
+  --color-ink: #0a0907;
+  --color-ink-soft: #12100c;
+  --color-ink-raised: #1b1712;
+  --color-ink-line: #2b2519;
+
+  /* Light surfaces — warm ivory, never pure white */
+  --color-bone: #f1ebe0;
+  --color-bone-dim: #d8cfc0;
+  --color-bone-muted: #9a8f7d;
+
+  /* Primary accent — antique brass. Deeper and less yellow than a
+     true gold, which photographs as cheap against warm timber. */
+  --color-gold: #c29b5a;
+  --color-gold-bright: #e6c88e;
+  --color-gold-dim: #7d6234;
+
+  /* Secondary — burnt clay, for rare emphasis only */
+  --color-clay: #a65e43;
+  /* Tertiary — dry sage, to cool a composition that is going too warm */
+  --color-sage: #6f7a66;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Jost Variable', 'Jost', system-ui, -apple-system, sans-serif;
+
+  /* Editorial display scale — clamped, so it never needs a breakpoint */
+  --text-display: clamp(2.5rem, 8vw, 7.5rem);
+  --text-display--line-height: 0.94;
+  --text-display--letter-spacing: -0.03em;
+  --text-headline: clamp(1.875rem, 4.5vw, 3.75rem);
+  --text-headline--line-height: 1.06;
+  --text-headline--letter-spacing: -0.02em;
+
+  /* Motion — slow, deliberate, expensive-feeling */
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-veil: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  * {
+    border-color: var(--color-ink-line);
+  }
+
+  html {
+    /* No `scroll-behavior: smooth` here — Lenis owns scroll easing, and
+       the two fight, producing a stutter on anchor jumps. Visitors with
+       reduced motion get native instant scroll, which is correct. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Lenis drives real scrolling, so the browser's own smoothing must
+     stay out of the way while it is active. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    /* Stops iOS rubber-banding from revealing white behind the page. */
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  /* Never let a wide child force the whole document sideways. */
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Keyboard focus only — never a ring on mouse click. */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Letterspaced micro-label used above headlines throughout the site. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /**
+   * Photographic colour grade.
+   *
+   * The stock photography arrives with wildly different white balances —
+   * some cool and blue, some heavily yellow. Pulling saturation back,
+   * lifting contrast slightly and warming everything a touch makes a
+   * grid of unrelated photographs read as one commissioned shoot.
+   * The 3D panoramas get the equivalent treatment in postprocessing.
+   */
+  .graded {
+    filter: saturate(0.88) contrast(1.06) brightness(0.97) sepia(0.08);
+  }
+}

@@ -1,0 +1,6 @@
+venice_sunset_1k.hdr
+Source: Poly Haven (https://polyhaven.com/a/venice_sunset)
+License: CC0 1.0 Universal (Public Domain Dedication)
+
+No attribution is required. Vendored locally rather than hot-linked so
+the 3D scene renders correctly with no dependency on an external CDN.

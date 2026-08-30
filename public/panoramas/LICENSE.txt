@@ -1,0 +1,15 @@
+360° equirectangular panoramas
+------------------------------
+Source : Poly Haven (https://polyhaven.com)
+License: CC0 1.0 Universal (Public Domain Dedication) — no attribution required
+
+  relax_inn_seaview_suite.jpg   https://polyhaven.com/a/relax_inn_seaview_suite
+  hotel_room.jpg                https://polyhaven.com/a/hotel_room
+  wooden_lounge.jpg             https://polyhaven.com/a/wooden_lounge
+  indoor_pool.jpg               https://polyhaven.com/a/indoor_pool
+  sundowner_deck.jpg            https://polyhaven.com/a/sundowner_deck
+
+Each is a real 360° photographic capture, downscaled from the 8192x4096
+tonemapped source to 5120x2560 (JPEG q80, progressive) for web delivery.
+Vendored locally rather than hot-linked so a client demo never depends on
+a third-party CDN.
